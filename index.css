@@ -1,16 +1,31 @@
-body{
-    background-color: rgba(0,0,0,0.6);
+*{
+    margin: 0;
+    padding: 0;
+}
+#main-section{
     background-image: url("/src/backgroundImage.jpg");
     background-position: center; 
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+html {
+    scroll-behavior: smooth;
+}
+#background{
+    position: absolute;
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.3);
 }
 .navbar{
     padding: 1rem 7rem;
     background: transparent;
 }
-.nav-link{
-    color: rgba(0,0,0);
+#main-section .navbar #navbarSupportedContent .navbar-nav .active, #main-section .navbar .navbar-brand{
+    color:white;
 }
 .navbar-collapse{
     flex-grow: 0;
@@ -18,9 +33,28 @@ body{
 .nav-item{
     padding: 0 1rem;
 }
-#main-section{
-    height: 100rem;
-    width: 100%;
+#search{
+    background: transparent;
+    border: white 1px solid;
+    color: white;
+}
+#nav-button{
+    border: white 1px solid;
+    color: white;
+}
+main{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: 80vh;
+}
+#heading{
+    margin: auto 0;
+    color: white;
+    text-align: center;
+}
+#heading h1{
+    font-size: 4rem;
 }
 #home-page{
     height: 100vh;
