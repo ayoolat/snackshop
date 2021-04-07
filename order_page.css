@@ -1,0 +1,33 @@
+#homepage{
+    position: relative;
+}
+section #categories{
+    display: flex;
+    padding: 0 7rem;
+    justify-content: space-between;
+    margin: 50px 0 20px 0;
+}
+.order_options{
+    padding: 0 7rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 4rem 0 1rem 0;
+}
+.options{
+    height: 350px;
+    margin: 1rem 0;
+    display: flex;
+    text-align: center;
+    /* flex-wrap: wrap; */
+}
+.options img{
+    height: 75%;
+    width: 50%;
+    object-fit: cover;
+}
+.order_options .options h5{
+    font-size: 1rem;
+}
+.order_options .options p{
+    font-size: .7rem;
+}
