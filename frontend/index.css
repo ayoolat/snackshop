@@ -6,7 +6,7 @@ body{
     box-sizing: border-box;
 }
 #main-section{
-    background-image: url("/src/backgroundImage.jpg");
+    background-image: url("./src/backgroundImage.jpg");
     /* background-position: center;  */
     background-repeat: no-repeat;
     background-size: cover;

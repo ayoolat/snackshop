@@ -5,7 +5,10 @@ const user = db.define('users', {
     roleID:{
         type: Sequelize.INTEGER
     },
-    Name:{
+    fistname:{
+        type: Sequelize.STRING
+    },
+    lastname:{
         type: Sequelize.STRING
     },
     email:{

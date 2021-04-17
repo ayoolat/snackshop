@@ -4,18 +4,18 @@ db = require('../config/database');
 users = require('../models/users')
 
 // find all users(admin and internal only)
-exports.allUsers = (req, res, next) => {
-    users.findAll()
+exports.allUsers = async (req, res, next) => {
+    const allUsers = await users.findAll()
         .then(users => {
-            res.sendStatus(200);
+            res.sendStatus(200).send(this.allUsers);
         })
         .catch(err => console.log(err));
 };
 
 // add new user
-exports.addUser = (req, res, next) => {
+exports.addUser =async (req, res, next) => {
     const {firstName, lastName, role} = req.body
-    newUser = await users.create({firstName: firstName, lastName: lastName, role:role})
+    const newUser = await users.create({firstName: firstName, lastName: lastName, role:role})
         .then(users => {
             res.sendStatus(200);
         })
@@ -23,7 +23,7 @@ exports.addUser = (req, res, next) => {
 }
 
 // edit user details
-exports.editUser = (req, res, next) => {
+exports.editUser =async (req, res, next) => {
     const {firstName, lastName, id} = req.body
     const findUser = await users.update({firstName: firstName, lastName: lastName}, {
         where: {
@@ -37,7 +37,7 @@ exports.editUser = (req, res, next) => {
 }
 
 // find a user
-exports.findAUser = (req, res, next) => {
+exports.findAUser =async (req, res, next) => {
     const {firstName, lastName, id} = req.body
     const findUser = await user.findAll({
         id: id,

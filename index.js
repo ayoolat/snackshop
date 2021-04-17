@@ -13,6 +13,7 @@ const app = express();
 
 // routes
 app.use('/users', require('./routes/users'))
+app.use('/admin', require('./routes/userRoles'))
 
 const PORT = process.env.PORT||5000
 
