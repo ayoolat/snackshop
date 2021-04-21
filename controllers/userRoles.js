@@ -1,26 +1,42 @@
-const user = require('../models/users');
-
 db = require('../config/database');
 userRoles = require('../models/userRoles')
 
 // get a userRole
 exports.getAllRoles =async (req, res, next) => {
-    const allRoles = await userRoles.findAll()
-    .then(userRoles => {
-        res.send(allRoles).sendStatus(200)
+    const allRoles = await userRoles.findAll({
+        attributes: ['Role', 'Id']
+    })
+    .then(allRoles => {
+        return res.status(200).json({status: 'success', response: allRoles})
     })
     .catch(err => {
-        res.send(err)
+        return res.send(err)
     })
 }
 
-exports.addUserRole = (req, res, next) => {
+// add a new role
+exports.addUserRole = async (req, res, next) => {
     const {role} = req.body
-    const addRole = userRoles.create({role : role})
-    .then(userRoles => {
-        res.send(addRole).sendStatus(200)
+    const addRole = await userRoles.create({Role : `${role}`})
+    .then(addRole => {
+        console.log(role)
+        return res.status(200).json({status: 'success', response: req.body})
     })
-    .catch(userRoles => {
-        res.sendStatus(400)
+    .catch(err => {
+        return res.status(400).send(err)
+    })
+}
+
+// delete a role
+exports.deleteUser = async (erq, res, next) => {
+    const {role} = req.body
+    const deleteRole = await userRoles.destroy({
+        Role : `${role}`
+    })
+    .then(deleteRole => {
+        return res.status(200).json({status: 'role deleted', response: req.body})
+    })
+    .catch(err => {
+        return res.status(400).send(err)
     })
 }

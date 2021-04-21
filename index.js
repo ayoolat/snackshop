@@ -10,10 +10,14 @@ db.authenticate()
     .catch(err=>console.log('Error : ' + err))
 
 const app = express();
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // routes
-app.use('/users', require('./routes/users'))
-app.use('/admin', require('./routes/userRoles'))
+app.use('/', require('./routes/signUpAndLogin'))
+app.use('/users', require('./routes/users'));
+app.use('/admin', require('./routes/userRoles'));
+app.use('/categories', require('./routes/categories'));
 
 const PORT = process.env.PORT||5000
 

@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 
-const roles = db.define('userROles', {
+const roles = db.define('userRoles', {
     Role:{
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
     }
 })
 

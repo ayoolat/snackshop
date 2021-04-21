@@ -1,53 +1,64 @@
-const user = require('../models/users');
-
+const users = require('../models/users');
 db = require('../config/database');
-users = require('../models/users')
 
 // find all users(admin and internal only)
 exports.allUsers = async (req, res, next) => {
     const allUsers = await users.findAll()
-        .then(users => {
-            res.sendStatus(200).send(this.allUsers);
+        .then(allUsers => {
+            return res.status(200).json({status: 'success', response: allUsers});
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            return res.status(400).send(err);
+        });
 };
 
 // add new user
 exports.addUser =async (req, res, next) => {
-    const {firstName, lastName, role} = req.body
-    const newUser = await users.create({firstName: firstName, lastName: lastName, role:role})
-        .then(users => {
-            res.sendStatus(200);
+    const {firstname, lastname, roleID, email} = req.body
+    const newUser = await users.create({firstname: `${firstname}`, lastname: `${lastname}`, roleID:`${roleID}`, Email: `${email}`})
+        .then(newUser => {
+            return res.status(200).json({status: 'success', response: req.body});
         })
-        .catch(err => res.sendStatus(400))
+        .catch(err => {
+            return res.status(400).send(err);
+        })
 }
 
 // edit user details
 exports.editUser =async (req, res, next) => {
-    const {firstName, lastName, id} = req.body
-    const findUser = await users.update({firstName: firstName, lastName: lastName}, {
-        where: {
-            userId: id
-        }
+    const {firstname, lastname, email} = req.body
+    const {id} = req.params
+    const findUser = await users.update({
+            firstname: `${firstname}`,
+            lastname: `${lastname}`,
+            email: `${email}`
+        }, 
+        {
+            where: {
+                id: `${id}`
+            }
     })
-    .then(users => {
-        res.sendStatus(200)
+    .then(findUser => {
+        return res.status(200).json({status: 'success', response: req.body});
     })
-    .catch(err => res.sendStatus(400))
+    .catch(err => {
+        return res.status(400).send(err);
+    })
 }
 
 // find a user
 exports.findAUser =async (req, res, next) => {
-    const {firstName, lastName, id} = req.body
+    const {id} = req.params
     const findUser = await user.findAll({
-        id: id,
-        firstName: firstName,
-        lastName: lastName
+        attributes: ['firstname', 'lastname', 'email'],
+        where: {
+            id: id
+        }
     })
-    .then(users => {
-        res.sendStatus(200).send(findUser)
+    .then(findUser => {
+        return res.status(200).json({status: 'success', response: findUser});
     })
     .catch(err => {
-        res.sendStatus(400)
+        return res.status(400).send(err);
     })
 }
