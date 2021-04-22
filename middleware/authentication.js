@@ -12,8 +12,11 @@ authenticateToken = (req, res, next) => {
         if(err){
             return res.status(400).json({error: "invalid or expired token"})
         }
-        
-        next()
+        else{
+            req.loginUser = verified
+            console.log('hi')
+            next()
+        }
     })
 }
 

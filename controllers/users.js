@@ -49,16 +49,22 @@ exports.editUser =async (req, res, next) => {
 // find a user
 exports.findAUser =async (req, res, next) => {
     const {id} = req.params
-    const findUser = await user.findAll({
-        attributes: ['firstname', 'lastname', 'email'],
-        where: {
-            id: id
-        }
-    })
-    .then(findUser => {
-        return res.status(200).json({status: 'success', response: findUser});
-    })
-    .catch(err => {
-        return res.status(400).send(err);
-    })
+    console.log(req.loginUser.data[0], id)
+    if(req.loginUser.data[0].roleID == id){
+        const findUser = await users.findAll({
+            attributes: ['firstname', 'lastname', 'email', 'roleID'],
+            where: {
+                id: id
+            }
+        })
+        .then(findUser => {
+            return res.status(200).json({status: 'success', response: findUser});
+        })
+        .catch(err => {
+            return res.status(400).json({status: 'There has been an error', response: err});
+        })
+    }
+    else{
+        return res.status(400).json({error: 'Unauthorized request'});
+    }
 }

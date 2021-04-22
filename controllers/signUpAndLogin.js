@@ -2,7 +2,6 @@ require('dotenv').config()
 const user = require('../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const authentication = require('../middleware/authentication')
 
 //staff login
 exports.signUp = (req, res, next) => {
@@ -34,7 +33,7 @@ exports.signUp = (req, res, next) => {
 exports.login = async (req, res, next) => {
     const {email, password} = req.body
     const loginUser = await user.findAll({
-        attributes: ['firstname', 'lastname', 'email', 'password'],
+        attributes: ['firstname', 'lastname', 'password', 'roleID', 'id'],
         where: {
             email: `${email}`
         }
@@ -47,12 +46,12 @@ exports.login = async (req, res, next) => {
             if(err){
                 return res.status(400).json({error: 'There has been an error'})
             }
-    
             else{
-
                 const token = jwt.sign({
                     data : loginUser
-                }, process.env.ACCESS_TOKEN_KEY, {expiresIn: '2h'})
+                }, process.env.ACCESS_TOKEN_KEY, {
+                    expiresIn: '2h'
+                })
 
                 return res.status(200).json({
                     success: loginUser,
@@ -60,11 +59,8 @@ exports.login = async (req, res, next) => {
                 })
             }
         })
-    })
-    
+    }) 
     .catch(err => {
         return res.status(400).json({status: 'There has been an error', error: err});
-    })
-    
-    
+    }) 
 }
