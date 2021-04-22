@@ -19,6 +19,7 @@ app.use('/users', require('./routes/users'));
 app.use('/admin', require('./routes/userRoles'));
 app.use('/categories', require('./routes/categories'));
 app.use('/size', require('./routes/sizes'));
+app.use('/cake-update', require('./routes/pricing'));
 
 const PORT = process.env.PORT||5000
 
