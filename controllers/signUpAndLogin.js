@@ -33,7 +33,7 @@ exports.signUp = (req, res, next) => {
 exports.login = async (req, res, next) => {
     const {email, password} = req.body
     const loginUser = await user.findAll({
-        attributes: ['firstname', 'lastname', 'password', 'roleID', 'id'],
+        attributes: ['firstname', 'lastname', 'email', 'password', 'roleID', 'id'],
         where: {
             email: `${email}`
         }

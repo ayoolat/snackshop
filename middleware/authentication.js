@@ -14,7 +14,6 @@ authenticateToken = (req, res, next) => {
         }
         else{
             req.loginUser = verified
-            console.log('hi')
             next()
         }
     })
