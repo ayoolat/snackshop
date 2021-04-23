@@ -49,8 +49,7 @@ exports.editUser =async (req, res, next) => {
 // find a user
 exports.findAUser =async (req, res, next) => {
     const {id} = req.params
-    console.log(req.loginUser.data[0], id)
-    if(req.loginUser.data[0].roleID == id){
+    if(req.loginUser.data[0].id == id){
         const findUser = await users.findAll({
             attributes: ['firstname', 'lastname', 'email', 'roleID'],
             where: {

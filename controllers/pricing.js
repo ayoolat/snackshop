@@ -17,7 +17,7 @@ exports.getCakePrice = async (req, res, next) => {
 exports.addASize = async(req, res, next) => {
     const {sizeID, price, numberAvailable, categoryID} = req.body;
     const addPriceDetails = await prices.create({
-        sizeID : `${sizeID}`,
+        sizeID  : `${sizeID}`,
         price : `${price}`,
         numberAvailable : `${numberAvailable}`,
         categoryID : `${categoryID}`
